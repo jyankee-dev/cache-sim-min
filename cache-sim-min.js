@@ -1,8 +1,7 @@
 import promptSync from 'prompt-sync';
 var tracker = [-1, -1, -1, -1];
 var cache = new Array(4).fill(new Array(9).fill(-1));
-var RAM = new Array(1024)
-for (let i = 0; i < RAM.length; i++) RAM[i] = parseInt(Math.random() * 500);
+var RAM = Array.from({ length: 1024 }, () => parseInt(Math.random() * 500));
 console.log("Display issues with prompt sync occur when prompts require line breaks. If you experience this, increase the size of your terminal window or zoom out");
 (() => {
     const updateTracker = (lru, line) => {
