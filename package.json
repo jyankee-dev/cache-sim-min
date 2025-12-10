@@ -1,0 +1,25 @@
+{
+  "name": "cache-sim-min",
+  "version": "1.0.0",
+  "description": "Smallest version of a cache simulation. (My attempt)",
+  "keywords": [
+    "Puzzle",
+    "test",
+    "fun"
+  ],
+  "homepage": "https://github.com/jyankee-dev/cache-sim-min#readme",
+  "bugs": {
+    "url": "https://github.com/jyankee-dev/cache-sim-min/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jyankee-dev/cache-sim-min.git"
+  },
+  "license": "ISC",
+  "author": "jyankee-dev",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
