@@ -8,9 +8,8 @@ console.log("Display issues with prompt sync occur when prompts require line bre
         if (!lru) tracker[line]++;
         else {
             tracker = tracker.map((el, index) => {
-                if (index === line) return 1;
                 if ((el !== -1) && (el < tracker[line] || tracker[line] == -1)) return el+1;
-                return el;
+                return index === line ? 1 : el;
             });
         }
     }
