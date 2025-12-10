@@ -1,25 +1,30 @@
 import promptSync from 'prompt-sync';
 var tracker = [-1, -1, -1, -1];
 var cache = new Array(4).fill(new Array(9).fill(-1));
-var RAM = Array.from({ length: 1024 }, () => parseInt(Math.random() * 500));
+var RAM = new Array(1024)
+for (let i = 0; i < RAM.length; i++) RAM[i] = parseInt(Math.random() * 500);
 console.log("Display issues with prompt sync occur when prompts require line breaks. If you experience this, increase the size of your terminal window or zoom out");
 (() => {
+    const cacheAssign = (TAG, block, line) => {
+        cache[line] = cache[line].map((el, i) => { return i === 0 ? TAG : block[i-1]});
+    }
     const updateTracker = (lru, line) => {
         if (!lru) tracker[line]++;
         else {
             tracker = tracker.map((el, index) => {
                 if (index === line) return 1;
                 if ((el !== -1) && (el < tracker[line] || tracker[line] == -1)) return el+1;
-                return el;
+                else return el;
             });
         }
+        return true;
     }
     const replaceInCache = (lru, TAG, block) => {
         let line;
         if (lru) line = tracker.indexOf(Math.max(...(tracker.filter(a => a !== -1))));
         else line = tracker.indexOf(Math.min(...(tracker.filter(a => a !== -1))));
         console.log(`Cache miss. Replacing cache line ${line}`)
-        cache[line] = cache[line].map((el, i) => { return i === 0 ? TAG : block[i-1]});
+        cacheAssign(TAG, block, line);
         updateTracker(lru, line);
     }
     const prompt = promptSync();
@@ -48,11 +53,11 @@ console.log("Display issues with prompt sync occur when prompts require line bre
             for (let line = 0; line < tracker.length && !updated; line++) {
                 if (tracker[line] == -1) {
                     console.log(`Assigning to empty line ${line}`)
-                    cache[line] = cache[line].map((el, i) => { return i === 0 ? TAG : block[i-1]});
-                    updated = updateTracker(lru, line) ? true : false;
+                    cacheAssign(TAG, block, line);
+                    updated = updateTracker(lru, line);
                 } else if (cache[line][0] === TAG) {
                     console.log(`Cache hit on ${cache[line][parseInt(input) % 8]} for line ${line}`);
-                    updated = updateTracker(lru, line) ? true : false;
+                    updated = updateTracker(lru, line);
                 }
             }
             if(!updated) replaceInCache(lru, TAG, block);
