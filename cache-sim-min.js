@@ -28,7 +28,6 @@ console.log("Display issues with prompt sync occur when prompts require line bre
         updateTracker(lru, line);
     }
     const prompt = promptSync();
-
     var input;
     var toggleValid = false;
     while (!toggleValid) {
