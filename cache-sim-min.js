@@ -13,7 +13,6 @@ console.log("Display issues with prompt sync occur when prompts require line bre
                 return el;
             });
         }
-        return true;
     }
     const replaceInCache = (lru, TAG, block) => {
         let line;
@@ -50,10 +49,10 @@ console.log("Display issues with prompt sync occur when prompts require line bre
                 if (tracker[line] == -1) {
                     console.log(`Assigning to empty line ${line}`)
                     cache[line] = cache[line].map((el, i) => { return i === 0 ? TAG : block[i-1]});
-                    updated = updateTracker(lru, line);
+                    updated = updateTracker(lru, line) ? true : false;
                 } else if (cache[line][0] === TAG) {
                     console.log(`Cache hit on ${cache[line][parseInt(input) % 8]} for line ${line}`);
-                    updated = updateTracker(lru, line);
+                    updated = updateTracker(lru, line) ? true : false;
                 }
             }
             if(!updated) replaceInCache(lru, TAG, block);
