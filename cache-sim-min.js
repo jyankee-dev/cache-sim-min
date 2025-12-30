@@ -39,7 +39,7 @@ console.log("Display issues with prompt sync occur when prompts require line bre
         if (parseInt(input) == -1) console.log(cache);
         if (parseInt(input) == -2) return;
         else {
-            var TAG = Math.floor(parseInt(input / 8)).toString(2).padStart(7, '0');
+            var TAG = Math.floor(parseInt(input) / 8).toString(2).padStart(7, '0');
             var block = cache[0].map((c, index) => { return RAM[Math.floor(parseInt(input) / 8) + index]});
             let updated = false;
             for (let line = 0; line < tracker.length && !updated; line++) {
