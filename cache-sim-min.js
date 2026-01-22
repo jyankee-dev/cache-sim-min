@@ -21,19 +21,18 @@ console.log("Display issues with prompt sync occur when prompts require line bre
     }
     const prompt = promptSync(); // gets prompt
     var input;
-    var toggleValid = false; // tracks valid input
-    while (!toggleValid) {
+    while (true) { // woooOOoOOoooOOOOoOOOo
         input = prompt("Enter 0 for LRU, Enter 1 for LFU, Enter 2 to EXIT");
         if (Number.isNaN(parseInt(input)) || parseInt(input) < 0 || parseInt(input) > 2) console.log("Enter a valid option"); // catches all invalid input
-        else  toggleValid = !toggleValid; // breaks when valid input received
+        else break;
     }
     if (parseInt(input) == 2) return; // quit condition
     const lru = parseInt(input) === 0; // lru is true if user inputs 0, otherwise false (lfu)
     while (true) { // wooooooOOOoOooOooOOoOOO
-        while (toggleValid) { // checks opposite case so we can save an assignment
+        while (true) { // woooooooOOOOoOOoOOoOoOOOOO
             input = prompt("Input byte address (in decimal integer format, 0 - 1023) CPU tries to visit(-1 to view cache. If table renders strangely, please zoom out with CTRL-. -2 to exit): ")
             if (Number.isNaN(parseInt(input)) || parseInt(input) > 1023 || parseInt(input) < -2) console.log("Enter a valid integer"); 
-            else toggleValid = !toggleValid
+            else break;
         }
         if (parseInt(input) == -1) console.log(cache); // show cache 
         else if (parseInt(input) == -2) return; // quit
