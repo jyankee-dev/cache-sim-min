@@ -4,4 +4,4 @@
 
 JS/Node implementation of a cache simulation with fewest lines possible (my attempt). 
 
-Currnetly uses 57 lines. Could be fewer without prompts and hints. How many can you do?
+Currnetly uses 56 lines. Could be fewer without prompts and hints. How many can you do?
